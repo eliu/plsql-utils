@@ -9,12 +9,12 @@ SELECT req.request_id,
        req.actual_start_date,
        req.actual_completion_date,
        req.argument_text
-  FROM fnd_concurrent_programs    fcp,
-       fnd_concurrent_programs_tl fcp_tl,
-       fnd_concurrent_requests    req,
-       fnd_lookup_values          pc,
-       fnd_lookup_values          sc,
-       fnd_user                   usr
+  FROM apps.fnd_concurrent_programs    fcp,
+       apps.fnd_concurrent_programs_tl fcp_tl,
+       apps.fnd_concurrent_requests    req,
+       apps.fnd_lookup_values          pc,
+       apps.fnd_lookup_values          sc,
+       apps.fnd_user                   usr
  WHERE fcp.application_id = req.program_application_id
    AND fcp.concurrent_program_id = req.concurrent_program_id
    AND fcp.enabled_flag = 'Y'
@@ -57,5 +57,4 @@ SELECT req.request_id,
               Req.STATUS_CODE)
    AND sc.view_application_id = 0
    AND req.requested_by = usr.user_id
-   AND fcp.concurrent_program_name LIKE '%&CONC_PROGRAM_NAME%'
 ;
