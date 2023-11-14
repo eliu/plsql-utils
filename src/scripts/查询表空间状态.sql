@@ -1,13 +1,13 @@
--- �鿴���ռ�ʹ�����
-SELECT UPPER(F.TABLESPACE_NAME) "���ռ���",
-       D.TOT_GROOTTE_MB "���ռ��С(M)",
-       D.TOT_GROOTTE_MB - F.TOTAL_BYTES "��ʹ�ÿռ�(M)",
+-- 查看表空间使用情况
+SELECT UPPER(F.TABLESPACE_NAME) "表空间名",
+       D.TOT_GROOTTE_MB "表空间大小(M)",
+       D.TOT_GROOTTE_MB - F.TOTAL_BYTES "已使用空间(M)",
        TO_CHAR(ROUND((D.TOT_GROOTTE_MB - F.TOTAL_BYTES) /
                      D.TOT_GROOTTE_MB * 100,
                      2),
-               '990.99') || '%' "ʹ�ñ�",
-       F.TOTAL_BYTES "���пռ�(M)",
-       F.MAX_BYTES "����(M)"
+               '990.99') || '%' "使用比",
+       F.TOTAL_BYTES "空闲空间(M)",
+       F.MAX_BYTES "最大块(M)"
   FROM (SELECT TABLESPACE_NAME,
                ROUND(SUM(BYTES) / (1024 * 1024), 2) TOTAL_BYTES,
                ROUND(MAX(BYTES) / (1024 * 1024), 2) MAX_BYTES
@@ -20,7 +20,7 @@ SELECT UPPER(F.TABLESPACE_NAME) "���ռ���",
  WHERE D.TABLESPACE_NAME = F.TABLESPACE_NAME
  ORDER BY 1;
 
---��ѯ���ռ��free space
+--查询表空间的free space
 select tablespace_name,
        count(*) AS extends,
        round(SUM(bytes) / 1024 / 1024,2) AS MB,
@@ -29,7 +29,7 @@ select tablespace_name,
  group BY tablespace_name;
 ;
 
--- ��ѯ���ռ�Ĵ�С
+-- 查询表空间的大小
 select tablespace_name, sum(bytes) / 1024 / 1024 as MB
-����from dba_data_files
-����group by tablespace_name;
+　　from dba_data_files
+　　group by tablespace_name;

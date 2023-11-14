@@ -1,4 +1,4 @@
--- 查找性能最差的SQL
+-- 鏌ユ壘鎬ц兘鏈�宸殑SQL
 SELECT B.USERNAME USERNAME,
        A.DISK_READS READS,
        A.EXECUTIONS EXEC,

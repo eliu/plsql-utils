@@ -15,14 +15,14 @@ PACKAGE BODY app_record2 IS
     l_item_type       VARCHAR2(240);
     l_item_canvas     VARCHAR2(240);
   BEGIN
-    l_block_name := name_in('SYSTEM.CURSOR_BLOCK');             -- »ñÈ¡¹â±êµ±Ç°ËùÔÚÊı¾İ¿é
-    l_block_id   := find_block(l_block_name);                   -- µÃµ½Êı¾İ¿éID
-    l_item_name  := get_block_property(l_block_id, FIRST_ITEM); -- µÃµ½Êı¾İ¿éÖĞµÄµÚÒ»¸öITEM
+    l_block_name := name_in('SYSTEM.CURSOR_BLOCK');             -- è·å–å…‰æ ‡å½“å‰æ‰€åœ¨æ•°æ®å—
+    l_block_id   := find_block(l_block_name);                   -- å¾—åˆ°æ•°æ®å—ID
+    l_item_name  := get_block_property(l_block_id, FIRST_ITEM); -- å¾—åˆ°æ•°æ®å—ä¸­çš„ç¬¬ä¸€ä¸ªITEM
 
     loop
-      l_item_id     := find_item(l_block_name || '.' || l_item_name); -- µÃµ½ÏîID
-      l_item_type   := get_item_property(l_item_id, ITEM_TYPE);       -- µÃµ½ÏîÀàĞÍ
-      l_item_canvas := get_item_property(l_item_id, ITEM_CANVAS);     -- µÃµ½ÏîËùÔÚµÄ»­²¼Ãû³Æ
+      l_item_id     := find_item(l_block_name || '.' || l_item_name); -- å¾—åˆ°é¡¹ID
+      l_item_type   := get_item_property(l_item_id, ITEM_TYPE);       -- å¾—åˆ°é¡¹ç±»å‹
+      l_item_canvas := get_item_property(l_item_id, ITEM_CANVAS);     -- å¾—åˆ°é¡¹æ‰€åœ¨çš„ç”»å¸ƒåç§°
 
       if ((l_item_type IN ('TEXT ITEM', 'LIST', 'DISPLAY ITEM', 'CHECKBOX')) AND
           (l_item_canvas IS NOT NULL) AND
